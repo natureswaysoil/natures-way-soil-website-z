@@ -4,8 +4,7 @@ cat > components/AddToCartButton.tsx <<'TSX'
 import { useCart } from "@/context/CartContext"
 
 type AddToCartButtonProps = {
- 
-}
+
 }: {
   id: string; name: string; amount: number; quantity?: number; className?: string;
 }) {
