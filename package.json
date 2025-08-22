@@ -1,1 +1,21 @@
-{ "name": "natureswaysoil-site", "version": "1.0.0", "private": true, "scripts": { "dev": "next dev", "build": "next build", "start": "next start", "lint": "eslint .", "format": "prettier --write ." }, "dependencies": { "next": "15.0.0", "react": "18.3.1", "react-dom": "18.3.1", "tailwindcss": "^3.4.10", "postcss": "^8.4.41", "autoprefixer": "^10.4.20", "lucide-react": "^0.446.0", "@radix-ui/react-slot": "^1.0.2", "class-variance-authority": "^0.7.0", "clsx": "^2.1.1", "tailwind-variants": "^0.2.1" }, "devDependencies": { "@eslint/js": "^9.9.0", "eslint": "^8.57.0", "eslint-config-next": "^14.2.5", "typescript": "^5.5.4" } }
+{
+  "name": "natureswaysoil-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.32",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+    /* Add your other dependencies here */
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "eslint-config-next": "^14.2.32"
+  }
+}
