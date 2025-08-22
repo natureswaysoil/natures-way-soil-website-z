@@ -1,8 +1,7 @@
-set -e
+# 0) Safety backup of whatever is there now
+cp -f package.json package.json.bak 2>/dev/null || true
 
-echo "🧹 Resetting conflicted files…"
-
-# 1) Write a clean, valid package.json (Next 15 + ESLint 9 + Node 20)
+# 1) Write a clean package.json (NO comments, NO extra text)
 cat > package.json <<'JSON'
 {
   "name": "natureswaysoil-site",
@@ -43,70 +42,24 @@ cat > package.json <<'JSON'
 }
 JSON
 
-# sanity: ensure no conflict markers remain
-! grep -q '<<<<<<<\|>>>>>>>' package.json || { echo "package.json still has conflict markers"; exit 1; }
-node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
+# 2) Validate JSON (this will throw if anything is malformed)
+node -e "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json ✅ valid')"
 
-# 2) Remove Pages Router duplicates if they exist (we're using the App Router)
-git rm -f pages/index.tsx pages/api/checkout.ts 2>/dev/null || true
-
-# 3) Ensure Button exists at the new path
-mkdir -p components/ui
-cat > components/ui/AddToCartButton.tsx <<'TSX'
-"use client"
-import { useCart } from "@/lib/cart"
-
-type AddToCartButtonProps = {
-  id: string
-  name: string
-  amount: number
-  quantity?: number
-  className?: string
-}
-
-export function AddToCartButton({
-  id, name, amount, quantity = 1, className
-}: AddToCartButtonProps) {
-  const { addItem } = useCart()
-  return (
-    <button
-      onClick={() => addItem({ id, name, amount, quantity })}
-      className={`px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 ${className ?? ""}`}
-    >
-      Add to Cart
-    </button>
-  )
-}
-export default AddToCartButton
-TSX
-
-# 4) Fix imports that still point to old button path
-sed -i "s#['\"]/\\.?\\.?/\\.?\\.?/components/AddToCartButton['\"]#'@/components/ui/AddToCartButton'#g" app/products/[slug]/page.tsx 2>/dev/null || true
-sed -i "s#['\"]/\\.?\\.?/components/AddToCartButton['\"]#'@/components/ui/AddToCartButton'#g" app/products/page.tsx 2>/dev/null || true
-sed -i "s#['\"]/components/AddToCartButton['\"]#'@/components/ui/AddToCartButton'#g" app/products/page.tsx 2>/dev/null || true
-
-# 5) Regenerate a clean lockfile
+# 3) Recreate lockfile cleanly
 rm -rf node_modules package-lock.json
 npm install --legacy-peer-deps
 
-# 6) If you were mid-rebase, continue; otherwise just commit
+# 4) If a rebase is in progress, continue; otherwise commit
 if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
-  git add -A
-  git rebase --continue || true
+  git add package.json package-lock.json
+  git rebase --continue
 else
-  git add -A
-  git commit -m "Fix conflicted package.json, regenerate lockfile, App Router only, add UI Button"
+  git add package.json package-lock.json
+  git commit -m "Fix package.json; regenerate lockfile"
 fi
 
-# 7) Make sure the remote uses HTTPS (SSH gave you 'permission denied' earlier)
+# 5) Ensure HTTPS remote and push
 git remote set-url origin https://github.com/natureswaysoil/natures-way-soil-website-z.git
-
-# 8) Push and set upstream (if needed)
 git push -u origin main
 
-# 9) Clean build locally (optional)
-rm -rf .next
-npm run build || true
-
-echo "✅ Repo fixed and pushed. Now redeploy on Vercel with Clear Build Cache."
 
