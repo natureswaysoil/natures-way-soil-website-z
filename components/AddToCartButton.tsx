@@ -4,13 +4,15 @@ cat > components/AddToCartButton.tsx <<'TSX'
 import { useCart } from "@/context/CartContext"
 
 type AddToCartButtonProps = {
-  id: string
-  name: string
-  amount: number
-  quantity?: number
-  className?: string
+ 
 }
+}: {
+  id: string; name: string; amount: number; quantity?: number; className?: string;
+}) {
+  const { addItem } = useCart();
+  const [loading, setLoading] = React.useState(false);
 
+  const onAdd = () => {
 export function AddToCartButton({
   id,
   name,
