@@ -1,8 +1,7 @@
-
+// lib/stripe.ts
 import Stripe from "stripe"
 
 if (!process.env.STRIPE_SECRET_KEY) {
-  // Avoid crashing builds if env not set; your API route can handle missing key at runtime.
   console.warn("STRIPE_SECRET_KEY is not set")
 }
 
