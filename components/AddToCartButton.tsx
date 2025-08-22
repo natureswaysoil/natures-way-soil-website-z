@@ -1,10 +1,6 @@
-git rm -f components/AddToCartButton.tsx
-
-mkdir -p components/ui
-cat > components/ui/AddToCartButton.tsx <<'TSX'
 // components/ui/AddToCartButton.tsx
 "use client"
-import { useCart } from "@/context/CartContext"
+import { useCart } from "@/lib/cart"
 
 type AddToCartButtonProps = {
   id: string
@@ -15,9 +11,14 @@ type AddToCartButtonProps = {
 }
 
 export function AddToCartButton({
-  id, name, amount, quantity = 1, className,
+  id,
+  name,
+  amount,
+  quantity = 1,
+  className,
 }: AddToCartButtonProps) {
   const { addItem } = useCart()
+
   return (
     <button
       onClick={() => addItem({ id, name, amount, quantity })}
@@ -27,6 +28,7 @@ export function AddToCartButton({
     </button>
   )
 }
+
 export default AddToCartButton
-TSX
+
 
