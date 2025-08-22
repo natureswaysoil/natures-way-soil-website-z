@@ -23,3 +23,12 @@
   "engines": { "node": ">=18 <21" }
 }
 
+{
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "arrowParens": "avoid",
+  "endOfLine": "lf"
+}
