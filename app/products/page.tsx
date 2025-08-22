@@ -1,4 +1,5 @@
 // app/products/page.tsx
+import { AddToCartButton } from "@/components/ui/AddToCartButton"
 import Link from "next/link"
 import { products } from "../../data/products"
 import { AddToCartButton } from "@/components/ui/AddToCartButton"
