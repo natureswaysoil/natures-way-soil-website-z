@@ -1,3 +1,4 @@
+// components/AddToCartButton.tsx
 "use client"
 import { useCart } from "@/context/CartContext"
 
@@ -9,7 +10,13 @@ type AddToCartButtonProps = {
   className?: string
 }
 
-export function AddToCartButton({ id, name, amount, quantity = 1, className }: AddToCartButtonProps) {
+export function AddToCartButton({
+  id,
+  name,
+  amount,
+  quantity = 1,
+  className,
+}: AddToCartButtonProps) {
   const { addItem } = useCart()
 
   return (
@@ -21,3 +28,6 @@ export function AddToCartButton({ id, name, amount, quantity = 1, className }: A
     </button>
   )
 }
+
+export default AddToCartButton
+
