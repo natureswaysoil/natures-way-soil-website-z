@@ -1,18 +1,21 @@
-import dynamic from 'next/dynamic';
-const ChatWidget = dynamic(() => import('../components/ChatWidgetStreaming'), { ssr: false });
+import { Button } from "@/components/ui/Button"
 
 export default function Home() {
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold">Welcome to Nature&apos;s Way Soil</h1>
-        <p>Browse products, add to cart, check out with Stripe, or ask us anything below.</p>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-background p-4 text-foreground">
+      <h1 className="text-4xl font-bold mb-6">Welcome to Nature's Way Soil</h1>
+      <p className="text-lg mb-6 text-muted-foreground">
+        This is a Next.js + Tailwind + shadcn/ui starter page.
+      </p>
+
+      <div className="flex gap-4">
+        <Button>Default Button</Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="outline" size="lg">
+          Large Outline
+        </Button>
       </div>
-      <div className="flex gap-3 flex-wrap">
-        <a href="/products" className="px-4 py-2 rounded bg-emerald-700 text-white">Shop Products</a>
-        <a href="/cart" className="px-4 py-2 rounded border">View Cart</a>
-      </div>
-      <ChatWidget />
-    </div>
-  );
+    </main>
+  )
 }
+
