@@ -1,3 +1,4 @@
+cat > components/AddToCartButton.tsx <<'TSX'
 // components/AddToCartButton.tsx
 "use client"
 import { useCart } from "@/context/CartContext"
@@ -30,4 +31,5 @@ export function AddToCartButton({
 }
 
 export default AddToCartButton
+TSX
 
