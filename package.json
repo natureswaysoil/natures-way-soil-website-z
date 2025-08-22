@@ -1,3 +1,4 @@
+cat > package.json <<'JSON'
 {
   "name": "natureswaysoil-site",
   "version": "1.0.0",
@@ -15,12 +16,15 @@
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "lucide-react": "0.446.0",
-    "next": "^15.5.0",
+    "next": "15.0.0",
     "postcss": "8.4.41",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwind-variants": "0.2.1",
-    "tailwindcss": "3.4.10"
+    "tailwindcss": "3.4.10",
+    "@stripe/stripe-js": "^3.4.1",
+    "stripe": "^16.6.0",
+    "openai": "^4.58.1"
   },
   "devDependencies": {
     "@eslint/js": "9.9.0",
@@ -32,4 +36,5 @@
     "node": ">=20 <21"
   }
 }
+JSON
 
