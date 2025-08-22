@@ -1,30 +1,23 @@
 "use client"
-import * as React from "react"
+import { useCart } from "@/context/CartContext"
 
-export function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      {...props}
-      className={"inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium bg-black text-white hover:bg-black/90 " + (props.className ?? "")}
-    />
-  )
+type AddToCartButtonProps = {
+  id: string
+  name: string
+  amount: number
+  quantity?: number
+  className?: string
 }
 
-}: {
-  id: string; name: string; amount: number; quantity?: number; className?: string;
-}) {
-  const { addItem } = useCart();
-  const [loading, setLoading] = React.useState(false);
-
-  const onAdd = () => {
-    setLoading(true);
-    addItem({ id, name, amount, quantity });
-    setLoading(false);
-  };
+export function AddToCartButton({ id, name, amount, quantity = 1, className }: AddToCartButtonProps) {
+  const { addItem } = useCart()
 
   return (
-    <button onClick={onAdd} disabled={loading} className={`px-4 py-2 rounded bg-emerald-700 text-white ${className}`}>
-      {loading ? 'Adding…' : 'Add to Cart'}
+    <button
+      onClick={() => addItem({ id, name, amount, quantity })}
+      className={`px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 ${className ?? ""}`}
+    >
+      Add to Cart
     </button>
-  );
+  )
 }
