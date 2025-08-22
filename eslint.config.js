@@ -7,7 +7,7 @@ export default [
     ignores: ["node_modules", ".next", "dist"],
   },
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,ts,jsx,tsx}"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -18,12 +18,11 @@ export default [
     },
     extends: [
       js.configs.recommended,
-      ...next(), // Next.js recommended rules
+      ...next()
     ],
     rules: {
-      // Example custom rules (safe defaults)
-      "react/react-in-jsx-scope": "off", // Not needed in Next.js
-      "@next/next/no-img-element": "off", // Allow <img> tags
+      "react/react-in-jsx-scope": "off",
+      "@next/next/no-img-element": "off"
     },
   },
 ];
