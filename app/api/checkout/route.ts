@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 // BEFORE (failing)
-import { stripe } from "../../../../lib/stripe"
 
 // AFTER (uses alias)
 import { stripe } from "@/lib/stripe"
