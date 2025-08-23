@@ -1,34 +1,30 @@
-// components/ui/AddToCartButton.tsx
-"use client"
-import { useCart } from "@/lib/cart"
+import React from "react";
+import { useCart } from "@/context/CartContext";
 
 type AddToCartButtonProps = {
-  id: string
-  name: string
-  amount: number
-  quantity?: number
-  className?: string
-}
+  id: string;
+  name: string;
+  amount: number;
+  quantity?: number;
+  className?: string;
+};
 
-export function AddToCartButton({
+export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   id,
   name,
   amount,
   quantity = 1,
   className,
-}: AddToCartButtonProps) {
-  const { addItem } = useCart()
+}) => {
+  const { addToCart } = useCart();
 
   return (
     <button
-      onClick={() => addItem({ id, name, amount, quantity })}
-      className={`px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 ${className ?? ""}`}
+      className={className}
+      onClick={() => addToCart({ id, name, amount, quantity })}
     >
       Add to Cart
     </button>
-  )
-}
-
-export default AddToCartButton
-
+  );
+};
 
