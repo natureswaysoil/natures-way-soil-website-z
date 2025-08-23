@@ -1,27 +1,44 @@
-import { CartProvider } from '../lib/cart';
-import Link from 'next/link';
 
-export const metadata = {
-  title: "Nature's Way Soil",
-  description: 'Organic soil & lawn products'
-};
+// app/layout.tsx
+import "./globals.css"
+import type { Metadata } from "next"
+import { CartProvider } from "@/lib/cart"
+
+export const metadata: Metadata = { title: "Nature's Way Soil" }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <header style={{padding:'12px',borderBottom:'1px solid #e5e7eb',display:'flex',justifyContent:'space-between'}}>
-          <Link href="/" style={{fontWeight:600}}>Nature&apos;s Way Soil</Link>
-          <nav style={{display:'flex',gap:12}}>
-            <Link href="/products">Products</Link>
-            <Link href="/cart">Cart</Link>
-            <Link href="/chat">Chat</Link>
-          </nav>
-        </header>
-        <CartProvider>
-          <main style={{padding:'16px'}}>{children}</main>
-        </CartProvider>
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
-  );
+  )
 }
+// components/ui/AddToCartButton.tsx
+"use client"
+import { useCart } from "@/lib/cart"
+
+type AddToCartButtonProps = {
+  id: string
+  name: string
+  amount: number
+  quantity?: number
+  className?: string
+}
+
+export function AddToCartButton({
+  id, name, amount, quantity = 1, className,
+}: AddToCartButtonProps) {
+  const { addItem } = useCart()
+  return (
+    <button
+      onClick={() => addItem({ id, name, amount, quantity })}
+      className={`px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 ${className ?? ""}`}
+    >
+      Add to Cart
+    </button>
+  )
+}
+
+export default AddToCartButton
