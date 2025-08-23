@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 
-type Msg = { role: 'user' | 'assistant'; content: string };
+type Msg = { role: 'user' | 'assistant' | 'system'; content: string };
 
 export default function ChatWidgetStreaming() {
   const [history, setHistory] = React.useState<Msg[]>([]);
@@ -10,7 +10,7 @@ export default function ChatWidgetStreaming() {
 
   async function send() {
     if (!input.trim()) return;
-    const next = [...history, { role: 'user', content: input }];
+    const next: Msg[] = [...history, { role: 'user', content: input }];
     setHistory(next);
     setInput('');
     setLoading(true);
