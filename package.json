@@ -1,39 +1,37 @@
-{
-  "name": "natureswaysoil-site",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "@radix-ui/react-slot": "1.0.2",
-    "@stripe/stripe-js": "^7.8.0",
-    "@types/node": "^24.3.0",
-    "autoprefixer": "10.4.20",
-    "class-variance-authority": "0.7.0",
-    "clsx": "2.1.1",
-    "lucide-react": "0.446.0",
-    "next": "^15.5.0",
-    "openai": "^5.15.0",
-    "postcss": "8.4.41",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "stripe": "^18.4.0",
-    "tailwind-variants": "0.2.1",
-    "tailwindcss": "3.4.10",
-    "tailwindcss-animate": "^1.0.7"
-  },
-  "devDependencies": {
-    "@eslint/js": "9.9.0",
-    "eslint": "9.33.0",
-    "eslint-config-next": "15.0.0",
-    "typescript": "5.5.4"
-  },
-  "engines": {
-    "node": ">=20 <21"
-  }
-}
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/package.json b/package.json
+index 4045bfee9b1db748ae80e24529bc5295685ffea4..c3dd3365206d11936397015557c745c19078f1ea 100644
+--- a/package.json
++++ b/package.json
+@@ -1,28 +1,27 @@
+ {
+   "name": "natureswaysoil",
+   "private": true,
+   "scripts": {
+     "dev": "next dev",
+     "build": "npm run generate-products && next build",
+     "start": "next start",
+     "generate-products": "node scripts/generate-products.js"
+   },
+   "dependencies": {
+     "@stripe/react-stripe-js": "^2.6.0",
+     "@stripe/stripe-js": "^2.4.0",
+     "next": "14.2.5",
+     "react": "18.2.0",
+     "react-dom": "18.2.0",
+     "stripe": "^16.0.0"
+-   
+   },
+   "devDependencies": {
+     "autoprefixer": "^10.4.17",
+     "postcss": "^8.4.35",
+     "tailwindcss": "^3.4.7",
+     "typescript": "^5.4.5",
+     "@types/react": "^18.2.66",
+     "@types/react-dom": "^18.2.22",
+     "@types/node": "^20.11.30"
+   }
+ }
+ 
+EOF
+)
