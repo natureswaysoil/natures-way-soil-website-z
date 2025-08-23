@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { products } from '../../data/products';
-import { AddToCartButton } from '@/components/ui/AddToCartButton';
+import { AddToCartButton } from '@/components/AddToCartButton';
 import { CheckoutButton } from '../../components/CheckoutButton';
 import { formatUSD } from '../../lib/cart';
 

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { AddToCartButton } from '@/components/ui/AddToCartButton';
+import { AddToCartButton } from '@/components/AddToCartButton';
 import { getProductBySlug } from '../../../data/products';
 import { CheckoutButton } from '../../../components/CheckoutButton';
 import { formatUSD } from '../../../lib/cart';

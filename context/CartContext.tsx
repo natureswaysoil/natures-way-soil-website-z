@@ -1,3 +1,10 @@
+export function useCart() {
+  const ctx = React.useContext(CartContext);
+  if (!ctx) throw new Error('useCart must be used within CartProvider');
+  return ctx;
+}
+"use client";
+import React from 'react';
 import { createContext, useState } from 'react';
 import { Product } from '../data/products';
 import { loadStripe } from '@stripe/stripe-js';
