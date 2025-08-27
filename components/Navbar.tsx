@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CartButton } from './CartButton';
+import { CartButton } from '@/components/CartButton';
 
 export default function Navbar() {
   return (
