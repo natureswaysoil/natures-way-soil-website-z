@@ -1,5 +1,5 @@
 import React from "react";
-import { useCart } from "@/context/CartContext";
+import { useCart } from "@/lib/cart";
 
 type AddToCartButtonProps = {
   id: string;
@@ -16,12 +16,12 @@ export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   quantity = 1,
   className,
 }) => {
-  const { addToCart } = useCart();
+  const { addItem } = useCart();
 
   return (
     <button
       className={className}
-      onClick={() => addToCart({ id, name, amount, quantity })}
+      onClick={() => addItem({ id, name, amount, quantity })}
     >
       Add to Cart
     </button>
