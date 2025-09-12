@@ -4,7 +4,7 @@ import React, { createContext, useState, useContext } from 'react';
 import { Product } from '../data/products';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || null);
 
 export const CartContext = createContext<any>(null);
 
@@ -23,6 +23,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const handleCheckout = async () => {
     const stripe = await stripePromise;
+    if (!stripe) return;
     const res = await fetch('/api/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -36,7 +37,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }),
     });
     const session = await res.json();
-    await stripe?.redirectToCheckout({ sessionId: session.id });
+    await stripe.redirectToCheckout({ sessionId: session.id });
   };
 
   return (
