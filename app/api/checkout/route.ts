@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json().catch(() => ({}))
     const items = Array.isArray(body?.items) ? body.items : null
-    if (!items) {
+    if (!items || items.length === 0) {
       return NextResponse.json({ error: 'No items to purchase' }, { status: 400 })
     }
 
